@@ -1,4 +1,4 @@
-#==========Bibliotecas (Instalacao e Importacao)==========
+#==========Bibliotecas (Instalacao e Carregamento)==========
 
 
 # Instalacao dos Pacotes:
