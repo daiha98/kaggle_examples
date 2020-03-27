@@ -1,5 +1,7 @@
 # p1_README_diamonds
 
+# URL dataset: https://www.kaggle.com/shivam2503/diamonds
+
 1. INTRODUCTION:
 
 This file contains the source informations about the classic dataset that contains the prices and other attributes of almost 
