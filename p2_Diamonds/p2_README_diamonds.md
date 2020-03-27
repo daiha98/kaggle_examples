@@ -1,6 +1,6 @@
 # p2_README_diamonds
 
-# URL dataset: https://www.kaggle.com/shivam2503/diamonds
+  ## URL dataset: https://www.kaggle.com/shivam2503/diamonds
 
 1. INTRODUCTION:
 
