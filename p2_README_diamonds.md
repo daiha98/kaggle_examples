@@ -21,7 +21,7 @@ using functions.
 'A data frame with 53940 rows and 10 variables:
 
 - CARAT - Weight of the diamond (0.2--5.01)
-~ A metric “carat” is defined as 200 milligrams. Each carat is subdivided into 100 points.~
+{ A metric “carat” is defined as 200 milligrams. Each carat is subdivided into 100 points. }
 
 - CUT - Quality of the Cut in increasing order: Fair, Good, Very Good, Premium, Ideal
 
@@ -30,7 +30,7 @@ using functions.
 - CLARITY - A measurement of how clear the diamond is: I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best)
 
 - DEPTH: The height of a diamond, measured from the culet to the table, divided by its average girdle diameter
-~Depth percentage = z / mean(x, y) = 2 * z / (x + y) (43--79)~
+{ Depth percentage = z / mean(x, y) = 2 * z / (x + y) (43--79) }
 
 - TABLE: Width of top of diamond relative to widest point (43--95)
 
