@@ -1,17 +1,20 @@
 # p1_README_rcf
 
-# URL dataset: ??? (This dataset was created on a MySQL database and it is not on Web.)
+  ## URL dataset: ??? (This dataset was created on a MySQL database and it is not on Web.)
 
-INTRODUCTION:
-This file contains the informations about a dataset that is related to the main parameters of rockfall in slopes and the risk that these events could cause. It's a small dataset with more than 1000 rows and 9 variables that the goal is to work with data analysis/visualization and machine learning algorithms.
+1. INTRODUCTION:
 
-PROGRAMMING LANGUAGE:
-This code was made on R, which is a language that is not entirely unlike (versions 3 and 4 of) the S language developed at AT&T Bell Laboratories by Rick Becker, John Chambers and Allan Wilks.
+  This file contains the informations about a dataset that is related to the main parameters of rockfall in slopes and the risk that these events could cause. It's a small dataset with more than 1000 rows and 9 variables that the goal is to work with data analysis/visualization and machine learning algorithms.
 
-R is free software distributed under a GNU-style copyleft. The core of R is an interpreted computer language with a syntax superficially similar to C, but which is actually a "functional programming language" with capabilities similar to Scheme. The language allows branching and looping as well as modular programming using functions.
+2. PROGRAMMING LANGUAGE:
 
-ABOUT THE DATASET:
-'A data frame with 1050 rows and 9 variables:
+  This code was made on R, which is a language that is not entirely unlike (versions 3 and 4 of) the S language developed at AT&T Bell Laboratories by Rick Becker, John Chambers and Allan Wilks.
+
+  R is free software distributed under a GNU-style copyleft. The core of R is an interpreted computer language with a syntax superficially similar to C, but which is actually a "functional programming language" with capabilities similar to Scheme. The language allows branching and looping as well as modular programming using functions.
+
+3. ABOUT THE DATASET:
+
+  'A data frame with 1050 rows and 9 variables:
 
 ID = Index counter
 
