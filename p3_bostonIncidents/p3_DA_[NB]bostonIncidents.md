@@ -3,6 +3,7 @@ p3\_DA\_\[NB\]bostonIncidents
 Felipe Daiha
 April 12, 2020
 
+Carregando Pacotes
 ```{r Carregando Pacotes}
 library("dplyr", lib.loc="~/R/win-library/3.6")
 library("ggplot2", lib.loc="~/R/win-library/3.6")
@@ -10,11 +11,13 @@ library("RgoogleMaps", lib.loc="~/R/win-library/3.6")
 library("raster", lib.loc="~/R/win-library/3.6")
 ```
 
+Upload da Base de Dados
 ```{r Upload do DB}
 crime = read.csv(
   "C:/Users/felip/Desktop/Cursos/Kaggle/bostonCrimes_kgl/crime.csv")
 ```
 
+Primeiras Linhas do DB
 ```{r Primeiras Linhas do DB}
 head(crime)
 ```
@@ -48,6 +51,7 @@ head(crime)
     ## 5 42.38185 -71.06655 (42.38184582, -71.06655134)
     ## 6 42.27796 -71.09246 (42.27796370, -71.09246318)
 
+Pré Processamento
 ```{r Pre Processamento}
 # Tratando NA's:
 
@@ -105,6 +109,7 @@ otl_crime_locations = crime_preproccess %>%
     ## "OCCURRED_ON_DATE", "YEAR", "MONTH", "DAY_OF_WEEK", "HOUR", "UCR_PART",
     ## "STREET", "Lat", "Long", "Location")
 
+Summary dos Dados Pós-Processamento
 ```{r Summary dos Dados Pos-Processamento}
 summary(crime_preproccess)
 ```
@@ -150,18 +155,21 @@ summary(crime_preproccess)
     ##  Max.   :42.40   Max.   :-71.00   (42.29755533, -71.05970910):  1153  
     ##                                   (Other)                    :387190
 
+Pegando o Mapa de Boston no Google Maps
 ```{r Armazenando o Mapa de Boston no Google Maps}
 coord_boston = GetMap(center = c(lat = 42.36025, lon = -71.05829), 
                     destfile = tempfile("boston_map", fileext = ".png"), 
                     zoom = 11, type = 'google-m')
 ```
 
+Plotando o Mapa da cidade
 ```{r Plotando o Mapa da Cidade, include=TRUE}
 boston_map = PlotOnStaticMap(coord_boston)
 ```
 
 ![](p3_DA_%5BNB%5DbostonIncidents_files/figure-markdown_github/Plotando%20o%20Mapa%20da%20Cidade-1.png)
 
+Distribuição dos Pontos de Ocorrência no Mapa
 ```{r Ocorrências dos Crimes Distribuidos no Mapa,include=TRUE}
 boston_map = PlotOnStaticMap(coord_boston)
 crime_occ_map = PlotOnStaticMap(boston_map, lon = crime_preproccess$Long, 
@@ -171,6 +179,7 @@ crime_occ_map = PlotOnStaticMap(boston_map, lon = crime_preproccess$Long,
 
 ![](p3_DA_%5BNB%5DbostonIncidents_files/figure-markdown_github/Ocorrências%20dos%20Crimes%20Distribuidos%20no%20Mapa-1.png)
 
+Colocando o Contorno dos Bairros
 ```{r Colocando o Contorno dos Bairros, include=TRUE}
 shp_nB = shapefile(
   "C:/Users/felip/Desktop/Cursos/Kaggle/bostonCrimes_kgl/Boston_Neighborhoods.shp")
@@ -197,6 +206,7 @@ PlotPolysOnStaticMap(MyMap = crime_occ_map, polys = shp_nB, add = T)
 
 ![](p3_DA_%5BNB%5DbostonIncidents_files/figure-markdown_github/Colocando%20o%20Contorno%20dos%20Bairros-1.png)
 
+Crimes Existentes
 ```{r Crimes Existentes}
 levels.default(sort(crime_preproccess[["OFFENSE_CODE_GROUP"]]))
 ```
@@ -269,6 +279,7 @@ levels.default(sort(crime_preproccess[["OFFENSE_CODE_GROUP"]]))
     ## [66] "Violations"                               
     ## [67] "Warrant Arrests"
 
+Encoding dos Crimes
 ```{r Encoding dos Crimes}
 encode_ordinal <- function(x, order = unique(x)) {
   x <- as.numeric(factor(x, levels = order, exclude = NULL))
@@ -283,6 +294,7 @@ crime_preproccess[["OFFENSE_SORT_ENCODED"]] =
     order = levels.default(sort(crime_preproccess[["OFFENSE_CODE_GROUP"]])))
 ```
 
+Barplot - Crimes
 ```{r Barplot - Crimes, include=TRUE}
 ggplot(data = crime_preproccess, aes(x = OFFENSE_SORT_ENCODED)) +
   geom_bar(aes(y = (..count..)), position = 'dodge', width = 0.5, fill = 'blue') +
@@ -298,6 +310,7 @@ Junho/2015 a Outubro/2019 (Fonte: data.boston.gov)") +
 
 ![](p3_DA_%5BNB%5DbostonIncidents_files/figure-markdown_github/Barplot%20-%20Crimes-1.png)
 
+Pieplot - Envolvimento c/ Arma de Fogo
 ```{r Pieplot - Envolvimento c/ Arma de Fogo, include=TRUE}
 n = sum(crime_preproccess$SHOOTING == 'N')
 y = sum(crime_preproccess$SHOOTING == 'Y')
@@ -319,6 +332,7 @@ text(0, 1, "Junho/2015 a Outubro/2019 (Fonte: data.boston.gov)", col = "black")
 
 ![](p3_DA_%5BNB%5DbostonIncidents_files/figure-markdown_github/Pieplot%20-%20Envolvimento%20c/%20Arma%20de%20Fogo-1.png)
 
+PreProcess - Time Series
 ```{r PreProcess - Time Series}
 # Criando a coluna 'DATE' para trabalhar com time series:
 
@@ -341,6 +355,7 @@ text(0, 1, "Junho/2015 a Outubro/2019 (Fonte: data.boston.gov)", col = "black")
   crime_preproccess$DATE = as.Date.character(crime_preproccess$DATE)
 ```
 
+Time Series - Ocorrencias por Mes/Ano
 ```{r Time Series - Ocorrencias por Mes/Ano, include=TRUE}
 ggplot(data = crime_preproccess, aes(x = MONTH)) +
   geom_line(stat = "count", colour = 'darkblue', size = 0.5) +
@@ -368,6 +383,7 @@ ggplot(data = crime_preproccess, aes(x = MONTH)) +
       ### Como a pesquisa termina no início de Outubro/2019, nao foi posta no grafico por não apresentar dados relativos do mes todo.
 ```
 
+Time Series - Ocorrencias por Hora/Ano
 ```{r Time Series - Ocorrencias por Hora/Ano, include=TRUE}
 ggplot(data = crime_preproccess, aes(x = HOUR)) +
     geom_line(stat = "count", colour = 'darkgrey', size = 1) +
@@ -388,6 +404,7 @@ ggplot(data = crime_preproccess, aes(x = HOUR)) +
 
 ![](p3_DA_%5BNB%5DbostonIncidents_files/figure-markdown_github/Time%20Series%20-%20Ocorrencias%20por%20Hora/Ano-1.png)
 
+Heat Map - PreProccess
 ```{r Heat Map - PreProccess}
 # Utilizando a funcao 'fortify' para transformar o shapefile em 
 # dataframe e pegar as coordenadas dos poligonos:
@@ -396,6 +413,7 @@ shp_nB.fort = shp_nB
 shp_nB.fort = fortify(shp_nB.fort)
 ```
 
+[1] Heat Map - Crimes em Geral
 ```{r [1] Heat Map - Crimes em Geral, include=TRUE}
 ggplot(shp_nB.fort, aes(x = long, y = lat, group = group)) +
     geom_polygon(colour = 'black', fill = 'white') +
@@ -408,6 +426,7 @@ ggplot(shp_nB.fort, aes(x = long, y = lat, group = group)) +
 
 ![](p3_DA_%5BNB%5DbostonIncidents_files/figure-markdown_github/%5B1%5D%20Heat%20Map%20-%20Crimes%20em%20Geral-1.png)
 
+[2] Heat Map - Crimes por Ano
 ```{r [2] Heat Map - Crimes por Ano, include=TRUE}
 ggplot(shp_nB.fort, aes(x = long, y = lat, group = group)) +
     geom_polygon(colour = 'black', fill = 'white') +
