@@ -5,47 +5,17 @@ April 12, 2020
 
 ``` r
 library("dplyr", lib.loc="~/R/win-library/3.6")
-```
-
-    ## Warning: package 'dplyr' was built under R version 3.6.3
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
-``` r
 library("ggplot2", lib.loc="~/R/win-library/3.6")
 library("RgoogleMaps", lib.loc="~/R/win-library/3.6")
-```
-
-    ## Warning: package 'RgoogleMaps' was built under R version 3.6.3
-
-``` r
 library("raster", lib.loc="~/R/win-library/3.6")
 ```
 
-    ## Warning: package 'raster' was built under R version 3.6.3
-
-    ## Loading required package: sp
-
-    ## 
-    ## Attaching package: 'raster'
-
-    ## The following object is masked from 'package:dplyr':
-    ## 
-    ##     select
 
 ``` r
 crime = read.csv(
   "C:/Users/felip/Desktop/Cursos/Kaggle/bostonCrimes_kgl/crime.csv")
 ```
+
 
 ``` r
 head(crime)
@@ -80,6 +50,7 @@ head(crime)
     ## 5 42.38185 -71.06655 (42.38184582, -71.06655134)
     ## 6 42.27796 -71.09246 (42.27796370, -71.09246318)
 
+
 ``` r
 # Tratando NA's:
 
@@ -106,25 +77,13 @@ crime %>%
   summarise_all(funs(sum(is.na(.))))
 ```
 
-    ## Warning: funs() is soft deprecated as of dplyr 0.8.0
-    ## Please use a list of either functions or lambdas: 
-    ## 
-    ##   # Simple named list: 
-    ##   list(mean = mean, median = median)
-    ## 
-    ##   # Auto named with `tibble::lst()`: 
-    ##   tibble::lst(mean, median)
-    ## 
-    ##   # Using lambdas
-    ##   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
-    ## This warning is displayed once per session.
-
     ##   INCIDENT_NUMBER OFFENSE_CODE OFFENSE_CODE_GROUP OFFENSE_DESCRIPTION DISTRICT
     ## 1               0            0                  0                   0     2169
     ##   REPORTING_AREA SHOOTING OCCURRED_ON_DATE YEAR MONTH DAY_OF_WEEK HOUR UCR_PART
     ## 1          27253        0                0    0     0           0    0      110
     ##   STREET   Lat  Long Location
     ## 1  12391 27204 27204        0
+
 
 ``` r
   ## Removendo MISSING VALUES do db:
