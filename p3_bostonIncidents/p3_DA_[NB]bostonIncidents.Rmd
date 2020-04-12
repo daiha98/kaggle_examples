@@ -1,3 +1,7 @@
+output: 
+  html_document:
+    keep_md: true
+
 ```{r Instalando Pacotes}
 install.packages('dplyr') ## Manipulacao de Dados
 install.packages('ggplot2') ## Visualizacao Grafica dos Dados
